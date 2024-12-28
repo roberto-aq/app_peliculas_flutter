@@ -1,3 +1,4 @@
+import 'package:cinemapedia/config/constants/environment.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class HomeScreen extends StatelessWidget {
         title: Text('Flutter Demo'),
       ),
       body: Center(
-        child: Text('Hello, World!'),
+        child: Text(Environment.theMovieDbKey),
       ),
     );
   }
