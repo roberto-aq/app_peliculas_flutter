@@ -8,7 +8,7 @@ import 'package:dio/dio.dart';
 class MoviedbDatasource extends MoviesDatasource {
   final dio = Dio(
       BaseOptions(baseUrl: 'https://api.themoviedb.org/3', queryParameters: {
-    'api-key': Environment.theMovieDbKey,
+    'api_key': Environment.theMovieDbKey,
     'language': 'es-MX',
   }));
 
