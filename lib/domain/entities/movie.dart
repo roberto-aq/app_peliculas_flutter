@@ -1,3 +1,6 @@
+import 'package:isar/isar.dart';
+
+@collection
 class Movie {
   final bool adult;
   final String backdropPath;

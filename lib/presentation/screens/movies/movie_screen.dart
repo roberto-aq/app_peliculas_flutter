@@ -140,6 +140,16 @@ class _CustomSliverAppBar extends StatelessWidget {
       backgroundColor: Colors.black,
       expandedHeight: size.height * 0.7,
       foregroundColor: Colors.white,
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.favorite_border),
+          // icon: const Icon(
+          //   Icons.favorite,
+          //   color: Colors.red,
+          // ),
+        ),
+      ],
       flexibleSpace: FlexibleSpaceBar(
         // titlePadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         // title: Text(
@@ -149,6 +159,18 @@ class _CustomSliverAppBar extends StatelessWidget {
         // ),
         background: Stack(
           children: [
+            const SizedBox.expand(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.0, 0.3],
+                    colors: [Colors.black45, Colors.transparent],
+                  ),
+                ),
+              ),
+            ),
             Positioned.fill(
               child: Image.network(
                 movie.posterPath,
