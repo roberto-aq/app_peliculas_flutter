@@ -26,7 +26,6 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   Widget build(BuildContext context) {
     final Movie? movie = ref.watch(movieInfoProvider)[widget.movieId];
 
-
     if (movie == null) {
       return Scaffold(
         body: const Center(
@@ -61,7 +60,6 @@ class _MovieDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final textStyles = Theme.of(context).textTheme;
     final colors = Theme.of(context).colorScheme;
 
     return Column(
@@ -117,9 +115,13 @@ class _MovieDetails extends StatelessWidget {
                     ))
               ],
             )),
-        const SizedBox(height: 50),
 
-        Placeholder()
+        // Actores de la pelicula
+        _ActorsByMovie(
+          movieId: movie.id.toString(),
+        ),
+
+        const SizedBox(height: 50),
       ],
     );
   }
@@ -139,12 +141,12 @@ class _CustomSliverAppBar extends StatelessWidget {
       expandedHeight: size.height * 0.7,
       foregroundColor: Colors.white,
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        title: Text(
-          movie.title,
-          style: const TextStyle(fontSize: 32, color: Colors.white),
-          textAlign: TextAlign.start,
-        ),
+        // titlePadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        // title: Text(
+        //   movie.title,
+        //   style: const TextStyle(fontSize: 32, color: Colors.white),
+        //   textAlign: TextAlign.start,
+        // ),
         background: Stack(
           children: [
             Positioned.fill(
@@ -164,6 +166,65 @@ class _CustomSliverAppBar extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ActorsByMovie extends ConsumerWidget {
+  final String movieId;
+
+  const _ActorsByMovie({required this.movieId});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final actorsByMovie = ref.watch(actorByMovieProvider);
+
+    if (actorsByMovie[movieId] == null) {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: Colors.indigoAccent,
+          strokeWidth: 3,
+        ),
+      );
+    }
+
+    final actors = actorsByMovie[movieId]!;
+
+    return SizedBox(
+      height: 300,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: actors.length,
+        itemBuilder: (context, index) {
+          final actor = actorsByMovie[movieId]![index];
+
+          return Container(
+            margin: const EdgeInsets.fromLTRB(10, 5, 5, 10),
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    actor.profilePath,
+                    height: 140,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  actor.name,
+                  maxLines: 2,
+                ),
+                Text(
+                  actor.character ?? '',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  maxLines: 2,
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }

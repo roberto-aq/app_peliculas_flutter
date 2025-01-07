@@ -16,9 +16,9 @@ class MovieMapper {
       popularity: movie.popularity,
       posterPath: movie.posterPath != ''
           ? 'https://image.tmdb.org/t/p/w500/${movie.posterPath}'
-          : 'no-image',
-      // : 'https://static.vecteezy.com/system/resources/previews/004/639/366/non_2x/error-404-not-found-text-design-vector.jpg',
-      releaseDate: movie.releaseDate,
+          // : 'no-image',
+          : 'https://static.vecteezy.com/system/resources/previews/004/639/366/non_2x/error-404-not-found-text-design-vector.jpg',
+      releaseDate: movie.releaseDate ?? DateTime.now(),
       title: movie.title,
       video: movie.video,
       voteAverage: movie.voteAverage,
