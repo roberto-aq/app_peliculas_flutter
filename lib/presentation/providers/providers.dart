@@ -10,3 +10,7 @@ export 'actors/actors_by_movie_provider.dart';
 
 // SEARCH
 export 'search/search_movies_provider.dart';
+
+// STORAGE
+export 'storage/local_storage_provider.dart';
+export 'storage/favorite_movies_provider.dart';

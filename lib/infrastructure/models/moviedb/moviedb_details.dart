@@ -132,14 +132,14 @@ class MovieDbDetails {
 class BelongsToCollection {
   final int id;
   final String name;
-  final String posterPath;
-  final String backdropPath;
+  final String? posterPath;
+  final String? backdropPath;
 
   BelongsToCollection({
     required this.id,
     required this.name,
-    required this.posterPath,
-    required this.backdropPath,
+    this.posterPath,
+    this.backdropPath,
   });
 
   factory BelongsToCollection.fromJson(Map<String, dynamic> json) =>
